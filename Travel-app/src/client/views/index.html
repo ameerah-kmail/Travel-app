@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travel App</title>
+    <link
+      href="https://fonts.googleapis.com/css?family=Oswald:400,600,700|Ranga:400,700&display=swap"
+      rel="stylesheet">
+  </head>
+  <body>
+    <h1>Travel Planner</h1>
+    <form id="travel-form">
+      <label for="location">Enter Location:</label>
+      <input type="text" id="location" placeholder="Location" required>
+
+      <label for="date">Date:</label>
+      <input type="date" id="date" required>
+      <button id="submit-btn">Get Info</button>
+  </form>
+  <div id="results">
+      <h2 id="trip-location"></h2>
+      <p id="trip-date"></p>
+      <p id="weather"></p>
+      <img id="trip-image"  alt="Location Image">
+  </div>
+    <!-- <script src="bundle.js"></script> -->
+  </body>
+</html>
