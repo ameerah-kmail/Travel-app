@@ -21,13 +21,13 @@
     "sass": "^1.84.0",
     "sass-loader": "^16.0.4",
     "style-loader": "^4.0.0",
-    "webpack": "^5.97.1",
+    "webpack": "^5.98.0",
     "webpack-cli": "^6.0.1",
     "webpack-dev-server": "^5.2.0"
   },
   "name": "travel-app",
   "version": "1.0.0",
-"type": "module",
+  "type": "module",
   "main": "webpack.dev.js",
   "scripts": {
     "build-prod": "webpack --config webpack.prod.js",

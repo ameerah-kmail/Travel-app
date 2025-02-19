@@ -1,13 +1,18 @@
 import path from 'path';
+import { fileURLToPath } from 'url';
 import webpack from 'webpack';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 
-module.exports = {
+// ✅ Define __dirname manually (Fixes the error)
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+export default {
   mode: 'production',
   entry: './src/client/index.js',
   output: {
     filename: 'bundle.js',
-    path: path.resolve(__dirname, 'dist'),
+    path: path.resolve(__dirname, 'dist'), // ✅ Now __dirname works
   },
   module: {
     rules: [
