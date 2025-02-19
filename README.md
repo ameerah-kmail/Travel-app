@@ -1,5 +1,5 @@
-- Travel Planner App
---  Overview
+# Travel Planner App
+## Overview
 
 The Travel Planner App helps users plan trips by providing weather forecasts and destination images. It integrates data from three external APIs:
 + Geonames API: Retrieves geographical coordinates for the destination.
@@ -7,9 +7,12 @@ The Travel Planner App helps users plan trips by providing weather forecasts and
 + Pixabay API: Displays images related to the destination.
 The app dynamically updates the UI and is built using modern web technologies, including Webpack, Express.js, and Service Workers.
 
---  Technologies Used
+## Technologies Used
 + Frontend: JavaScript (ES6+), SCSS, HTML
 + Backend: Node.js, Express.js
 + APIs: Geonames, Weatherbit, Pixabay
 + Build Tools: Webpack
 + Testing: Jest
+
+## Prerequisites
+- Node.js v18.18.0 or later
