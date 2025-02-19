@@ -15,4 +15,4 @@ The app dynamically updates the UI and is built using modern web technologies, i
 + Testing: Jest
 
 ## Prerequisites
-- Node.js v18.18.0 or later
+- Node.js v18.18.0 
