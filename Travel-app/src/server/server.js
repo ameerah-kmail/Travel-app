@@ -4,19 +4,23 @@ import dotenv from "dotenv";
 import fetch from "node-fetch";
 import bodyParser from 'body-parser';
 
-
+// Load environment variables from .env file
 dotenv.config();
 const app = express();
 app.use(express.static("dist"));
-app.use(cors());
-app.use(bodyParser.json());
+app.use(cors()); // Enable CORS for cross-origin requests
+app.use(bodyParser.json()); // Parse incoming JSON requests
 
 const PORT = 8001;
 
+// GeoNames API configuration
 const GEO_API_URL = 'http://api.geonames.org/searchJSON';
 const GEO_USERNAME = 'ameera';
+
+// GeoNames endpoint to get latitude and longitude for a given location
 app.post("/geonames", async (req, res) => {
   const { location } = req.body;
+
   if (!location) {
     return res.status(400).send({ error: "Location is required" });
   }
@@ -40,10 +44,14 @@ app.post("/geonames", async (req, res) => {
   }
 });
 
+// Weatherbit API configuration
 const WEATHER_API_URL = 'https://api.weatherbit.io/v2.0/current';
 const WEATHER_API_KEY = '052c573e7ca14c9d83c16eb75f95b9ed';
+
+// Weatherbit endpoint to get weather data based on latitude and longitude
 app.post("/weatherbit", async (req, res) => {
   const { lat, lng } = req.body; 
+
   if (!lat || !lng) {
     return res.status(400).send({ error: 'Latitude and Longitude are required' });
   }
@@ -68,9 +76,11 @@ app.post("/weatherbit", async (req, res) => {
   }
 });
 
-
+// Pixabay API configuration
 const PIXABAY_API_URL = 'https://pixabay.com/api/';
 const PIXABAY_API_KEY = '48833698-dc902069d630a00879dadedc3'; 
+
+// Pixabay endpoint to get images for a given location
 app.post("/pixabay", async (req, res) => {
   console.log('Request body:', req.body);
   const { location } = req.body; 
@@ -101,11 +111,12 @@ app.post("/pixabay", async (req, res) => {
   }
 });
 
-// Default route
+// Default route to serve the HTML file
 app.get('/', (req, res) => {
   res.sendFile('dist/index.html');
 });
 
+// Start the server
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });

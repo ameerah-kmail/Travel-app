@@ -1,3 +1,4 @@
+// Function to update the UI with the provided data
 export function updateUI({ location, date, weatherData, imageURL }) {
   document.getElementById("trip-location").textContent = location;
   document.getElementById("trip-date").textContent = `Departing on: ${date}`;

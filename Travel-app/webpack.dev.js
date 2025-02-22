@@ -3,6 +3,7 @@ import { fileURLToPath } from 'url';
 import webpack from 'webpack';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import { CleanWebpackPlugin } from 'clean-webpack-plugin';
+import { GenerateSW } from 'workbox-webpack-plugin';
 
 // Convert __dirname in ES Module
 const __filename = fileURLToPath(import.meta.url);
@@ -49,6 +50,10 @@ export default {
       verbose: true,
       cleanStaleWebpackAssets: true,
       protectWebpackAssets: false,
+    }),
+    new GenerateSW({
+      clientsClaim: true,
+      skipWaiting: true,
     }),
   ],
 };

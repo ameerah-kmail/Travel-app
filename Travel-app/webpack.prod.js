@@ -2,8 +2,9 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import webpack from 'webpack';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
+import { GenerateSW } from 'workbox-webpack-plugin';  // Import Workbox plugin
 
-// ✅ Define __dirname manually (Fixes the error)
+// Define __dirname manually (Fixes the error)
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -12,7 +13,7 @@ export default {
   entry: './src/client/index.js',
   output: {
     filename: 'bundle.js',
-    path: path.resolve(__dirname, 'dist'), // ✅ Now __dirname works
+    path: path.resolve(__dirname, 'dist'), // Now __dirname works
   },
   module: {
     rules: [
@@ -37,6 +38,10 @@ export default {
     new HtmlWebpackPlugin({
       template: './src/client/views/index.html',
       filename: 'index.html',
+    }),
+    new GenerateSW({
+      clientsClaim: true,   // Ensures immediate control over the page
+      skipWaiting: true,    // Forces waiting service workers to activate immediately
     }),
   ],
 };
