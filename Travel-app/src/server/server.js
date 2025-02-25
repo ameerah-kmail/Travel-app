@@ -34,7 +34,7 @@ app.post("/geonames", async (req, res) => {
     if (data.geonames && data.geonames.length > 0) {
       const { lat, lng } = data.geonames[0];
       res.send({ lat, lng });
-    } else {
+    } else if (!data.geonames || data.geonames.length === 0){
       console.error("❌ Location not found in GeoNames response.");
       res.status(404).send({ error: "Location not found", rawData: data });
     }
@@ -50,7 +50,7 @@ const WEATHER_API_KEY = '052c573e7ca14c9d83c16eb75f95b9ed';
 
 // Weatherbit endpoint to get weather data based on latitude and longitude
 app.post("/weatherbit", async (req, res) => {
-  const { lat, lng } = req.body; 
+  const { lat, lng } = req.body;
 
   if (!lat || !lng) {
     return res.status(400).send({ error: 'Latitude and Longitude are required' });
@@ -60,21 +60,24 @@ app.post("/weatherbit", async (req, res) => {
     const response = await fetch(`${WEATHER_API_URL}?lat=${lat}&lon=${lng}&key=${WEATHER_API_KEY}`);
     const data = await response.json();
 
-    if (data.data && data.data.length > 0) {
-      const weather = data.data[0];
-      res.send({
-        temperature: weather.temp,
-        weather_description: weather.weather.description,
-        city_name: weather.city_name,
-      });
-    } else {
-      res.status(404).send({ error: 'Weather data not found' });
+    // Check for a specific Weatherbit error
+    if (data.error || !data.data || data.data.length === 0) {
+      console.error("❌ Weather data not found or invalid coordinates");
+      return res.status(404).send({ error: 'Weather data not found' });
     }
+
+    const weather = data.data[0];
+    res.send({
+      temperature: weather.temp,
+      weather_description: weather.weather.description,
+      city_name: weather.city_name,
+    });
   } catch (error) {
     console.error('Error fetching data from Weatherbit:', error);
     res.status(500).send({ error: 'Internal server error' });
   }
 });
+
 
 // Pixabay API configuration
 const PIXABAY_API_URL = 'https://pixabay.com/api/';

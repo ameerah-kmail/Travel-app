@@ -19,7 +19,7 @@ const handleSubmit = async (event) => {
 
     updateUI({ location, date, weatherData, imageURL });
   } catch (error) {
-    console.error('❌ Error fetching data:', error);
+    // console.error('❌ Error fetching data:', error);
     alert(error);
   }
 };
@@ -47,7 +47,7 @@ async function fetchGeoData(location) {
     const { lat, lng } = data; 
     return { lat, lng }; 
   } catch (error) {
-    console.error("❌ Error in fetchGeoData:", error);
+    // console.error("❌ Error in fetchGeoData:", error);
     return null; 
   }
 }
@@ -71,7 +71,7 @@ async function fetchWeatherData(lat, lng) {
     console.log('Weather Data:', weatherData);
     return weatherData; 
   } catch (error) {
-    console.error('❌ Error in fetchWeatherData:', error);
+    // console.error('❌ Error in fetchWeatherData:', error);
   }
 }
 
@@ -94,7 +94,7 @@ async function fetchImage(location) {
     // Return the image URL or a default placeholder if not found
     return data.imageUrl || "https://via.placeholder.com/300";
   } catch (error) {
-    console.error("❌ Error fetching image:", error);
+    // console.error("❌ Error fetching image:", error);
     return "https://via.placeholder.com/300"; // Return default image URL if there's an error
   }
 }
