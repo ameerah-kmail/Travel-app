@@ -1,11 +1,14 @@
 import request from "supertest";
 import app from "../src/server/server"; // Ensure this path is correct
 
-const port = process.env.PORT || 8002;
+const port = process.env.PORT || 0;
 let server;
 
-beforeAll(() => {
-  server = app.listen(port, () => console.log("Server started"));
+beforeAll((done) => {
+  server = app.listen(port, () => {
+    console.log(`Server started on port ${server.address().port}`);
+    done();
+  });
 });
 
 afterAll(async () => {

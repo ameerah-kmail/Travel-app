@@ -116,7 +116,8 @@ app.post("/pixabay", async (req, res) => {
 
 // Default route to serve the HTML file
 app.get('/', (req, res) => {
-  res.sendFile('dist/index.html');
+  console.log("Default route accessed.");
+  res.send("Welcome to the API!");
 });
 
 // Start the server
